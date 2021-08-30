@@ -254,15 +254,15 @@ function startCountdown() {
   setTimeout(() => {
     countdown.textContent = "GO!";
   }, 1500);
+  setTimeout(navigateToGamePage, 2000);
 }
 
 // AKA showCountdown()
 function navigateFromSplashToCountdownPage() {
   splashPage.hidden = true;
   countdownPage.hidden = false;
-  startCountdown();
   populateGamePage();
-  setTimeout(navigateToGamePage, 2000);
+  startCountdown();
   itemContainer.scrollTo({ top: 0, behavior: "instant" });
 }
 
