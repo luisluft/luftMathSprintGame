@@ -22,6 +22,7 @@ const playAgainBtn = document.querySelector(".play-again");
 // Equations
 let questionAmount = 0;
 let equationsArray = [];
+let playerGuessArray = [];
 
 // Game Page
 let firstNumber = 0;
@@ -32,6 +33,7 @@ const wrongFormat = [];
 // Time
 
 // Scroll
+let valueY = 0;
 
 // Get random number up to a maximum number
 function getRandomNumberUpToMaxNumber(max) {
@@ -169,6 +171,19 @@ function selectQuestionAmount(event) {
 
   if (questionAmount) navigateFromSplashToCountdownPage();
 }
+
+// AKA select()
+function storeAnswerAndScroll(guessedTrue) {
+  // Scrolls 80 pixels at a time
+  valueY += 80;
+  itemContainer.scroll(0, valueY);
+
+  // Add guesses to array
+  guessedTrue ? playerGuessArray.push("true") : playerGuessArray.push("false");
+  console.log("playerGuessArray :", playerGuessArray);
+  return;
+}
+window.storeAnswerAndScroll = storeAnswerAndScroll;
 
 // Event listeners
 startForm.addEventListener("click", selectQuestionsOption);
