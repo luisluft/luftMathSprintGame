@@ -103,10 +103,31 @@ function getSelectedRadioButtonValue() {
   return radioValue;
 }
 
+function startCountdown() {
+  countdown.textContent = "3";
+  setTimeout(() => {
+    countdown.textContent = "2";
+  }, 1000);
+  setTimeout(() => {
+    countdown.textContent = "1";
+  }, 2000);
+  setTimeout(() => {
+    countdown.textContent = "GO!";
+  }, 3000);
+}
+
+// AKA showCountdown()
+function navigateFromSplashToCountdownPage() {
+  splashPage.hidden = true;
+  countdownPage.hidden = false;
+  startCountdown();
+}
+
 function selectQuestionAmount(event) {
   event.preventDefault();
   questionAmount = getSelectedRadioButtonValue();
-  console.log("questionAmount :", questionAmount);
+
+  if (questionAmount) navigateFromSplashToCountdownPage();
 }
 
 // Event listeners
