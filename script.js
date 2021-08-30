@@ -85,7 +85,7 @@ function showScorePage() {
   // Show play again button after 1s
   setTimeout(() => {
     playAgainButton.hidden = false;
-  }, 1000);
+  }, 500);
 
   gamePage.hidden = true;
   scorePage.hidden = false;
@@ -181,6 +181,11 @@ function createEquations() {
 function navigateToGamePage() {
   countdownPage.hidden = true;
   gamePage.hidden = false;
+  itemContainer.scrollTo({ top: 0, behavior: "instant" });
+  console.log(
+    'itemContainer.scrollTo({ top: 0, behavior: "instant" }) :',
+    itemContainer.scrollTo({ top: 0, behavior: "instant" })
+  );
 }
 
 // AKA equationToDOM()
@@ -261,9 +266,9 @@ function startCountdown() {
 function navigateFromSplashToCountdownPage() {
   splashPage.hidden = true;
   countdownPage.hidden = false;
+
   populateGamePage();
   startCountdown();
-  itemContainer.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function selectQuestionAmount(event) {
@@ -288,7 +293,6 @@ window.storeAnswerAndScroll = storeAnswerAndScroll;
 function playAgain() {
   // Add the event listener back
   gamePage.addEventListener("click", startTimer);
-
   playAgainButton.hidden = true;
   scorePage.hidden = true;
   splashPage.hidden = false;
