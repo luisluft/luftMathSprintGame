@@ -148,12 +148,9 @@ function getRandomNumberUpToMaxNumber(max) {
 function createEquations() {
   // Randomly choose how many correct equations there should be
   const correctEquations = getRandomNumberUpToMaxNumber(questionAmount);
-  console.log("questionAmount :", questionAmount);
-  console.log("correctEquations :", correctEquations);
 
   // Set amount of wrong equations
   const wrongEquations = questionAmount - correctEquations;
-  console.log("wrongEquations :", wrongEquations);
 
   // Loop through, multiply random numbers up to 9, push to array
   for (let i = 0; i < correctEquations; i++) {
@@ -200,7 +197,6 @@ function displayEquations() {
     // Append
     item.appendChild(equationText);
     itemContainer.appendChild(item);
-    console.log("item :", item);
   });
 }
 
@@ -285,7 +281,6 @@ function storeAnswerAndScroll(guessedTrue) {
 
   // Add guesses to array
   guessedTrue ? playerGuessArray.push("true") : playerGuessArray.push("false");
-  console.log("playerGuessArray :", playerGuessArray);
   return;
 }
 window.storeAnswerAndScroll = storeAnswerAndScroll;
