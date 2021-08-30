@@ -31,9 +31,50 @@ let equationObject = {};
 const wrongFormat = [];
 
 // Time
+let timer;
+let timePlayed = 0;
+let baseTime = 0;
+let penaltyTime = 0;
+let finalTime = 0;
+let finalTimeDisplayed = "0.0s";
 
 // Scroll
 let valueY = 0;
+
+function stopTimerIfFinishedQuestions() {
+  if (playerGuessArray.length == questionAmount) {
+    clearInterval(timer);
+
+    // Check for wrong guesses and add penalty time
+    equationsArray.forEach((equation, index) => {
+      if (equation.evaluated === playerGuessArray[index]) {
+        // Correct guess, no penalty
+      } else {
+        // Incorrect guess, add penalty
+        penaltyTime += 0.5;
+      }
+    });
+    finalTime = timePlayed + penaltyTime;
+    console.log("timePlayed :", timePlayed);
+    console.log("penaltyTime :", penaltyTime);
+    console.log("finalTime :", finalTime);
+  }
+}
+
+function addTenthSecondToTimePlayed() {
+  timePlayed += 0.1;
+  stopTimerIfFinishedQuestions();
+}
+
+function startTimer() {
+  // Reset times
+  timePlayed = 0;
+  penaltyTime = 0;
+  finalTime = 0;
+
+  timer = setInterval(addTenthSecondToTimePlayed, 100);
+  gamePage.removeEventListener("click", startTimer);
+}
 
 // Get random number up to a maximum number
 function getRandomNumberUpToMaxNumber(max) {
@@ -188,3 +229,4 @@ window.storeAnswerAndScroll = storeAnswerAndScroll;
 // Event listeners
 startForm.addEventListener("click", selectQuestionsOption);
 startForm.addEventListener("submit", selectQuestionAmount);
+gamePage.addEventListener("click", startTimer);
