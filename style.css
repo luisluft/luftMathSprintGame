@@ -268,7 +268,7 @@ button:active {
 }
 
 /* Media Query: Large Smartphone (Vertical) */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .game-container {
     width: 100%;
     margin-top: 0;
@@ -297,22 +297,27 @@ button:active {
   }
 
   label {
-    font-size: 1.7rem;
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .base-time {
+    font-size: 1.5rem;
+  }
+
+  .penalty-time {
+    font-size: 1.5rem;
   }
 
   .best-score {
     font-size: 1rem;
-    left: 245px;
+    left: 65%;
   }
 
   .selection-footer {
     top: 183px;
-  }
-}
-
-/* Media Query: iPhone */
-@media screen and (max-width: 376px) {
-  .best-score {
-    left: 232px;
   }
 }
