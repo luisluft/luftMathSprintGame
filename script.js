@@ -14,10 +14,10 @@ const countdown = document.querySelector(".countdown");
 // Game Page
 const itemContainer = document.querySelector(".item-container");
 // Score Page
-const finalTimeEl = document.querySelector(".final-time");
-const baseTimeEl = document.querySelector(".base-time");
-const penaltyTimeEl = document.querySelector(".penalty-time");
-const playAgainBtn = document.querySelector(".play-again");
+const finalTimeElement = document.querySelector(".final-time");
+const baseTimeElement = document.querySelector(".base-time");
+const penaltyTimeElement = document.querySelector(".penalty-time");
+const playAgainButton = document.querySelector(".play-again");
 
 // Equations
 let questionAmount = 0;
@@ -41,6 +41,31 @@ let finalTimeDisplayed = "0.0s";
 // Scroll
 let valueY = 0;
 
+function showScorePage() {
+  // Show play again button after 1s
+  setTimeout(() => {
+    playAgainButton.hidden = false;
+  }, 1000);
+
+  gamePage.hidden = true;
+  scorePage.hidden = false;
+}
+
+function formatAndDisplayTime() {
+  // Format numbers
+  finalTimeDisplayed = finalTime.toFixed(1);
+  baseTime = timePlayed.toFixed(1);
+  penaltyTime = penaltyTime.toFixed(1);
+
+  // Display numbers
+  baseTimeElement.textContent = `Base Time: ${baseTime}s`;
+  penaltyTimeElement.textContent = `Penalty Time: +${penaltyTime}s`;
+  finalTimeElement.textContent = `${finalTimeDisplayed}s`;
+
+  showScorePage();
+  itemContainer.scrollTo({ top: 0, behavior: "instant" });
+}
+
 function stopTimerIfFinishedQuestions() {
   if (playerGuessArray.length == questionAmount) {
     clearInterval(timer);
@@ -55,9 +80,7 @@ function stopTimerIfFinishedQuestions() {
       }
     });
     finalTime = timePlayed + penaltyTime;
-    console.log("timePlayed :", timePlayed);
-    console.log("penaltyTime :", penaltyTime);
-    console.log("finalTime :", finalTime);
+    formatAndDisplayTime();
   }
 }
 
@@ -226,7 +249,22 @@ function storeAnswerAndScroll(guessedTrue) {
 }
 window.storeAnswerAndScroll = storeAnswerAndScroll;
 
+function playAgain() {
+  // Add the event listener back
+  gamePage.addEventListener("click", startTimer);
+
+  playAgainButton.hidden = true;
+  scorePage.hidden = true;
+  splashPage.hidden = false;
+
+  equationsArray = [];
+  playerGuessArray = [];
+
+  valueY = 0;
+}
+
 // Event listeners
 startForm.addEventListener("click", selectQuestionsOption);
 startForm.addEventListener("submit", selectQuestionAmount);
 gamePage.addEventListener("click", startTimer);
+playAgainButton.addEventListener("click", playAgain);
